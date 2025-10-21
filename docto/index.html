@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cupcake">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Doctor Appointment</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+            plugins: [require('daisyui')],
+            daisyui: {
+                themes: ["cupcake"], // Use a light, friendly theme
+            },
+        }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-accent-100 min-h-screen font-sans">
+
+    <nav class="navbar bg-base-300 shadow-md rounded-b-lg p-2">
+        <div class="navbar-start">
+            <a class="btn btn-ghost text-xl text-primary font-bold">Online Doctor Appointment</a>
+        </div>
+        <div class="navbar-end">
+            <ul class="menu menu-horizontal px-1 hidden md:flex">
+                <li><a><i data-lucide="home" class="w-4 h-4 mr-1"></i> Home</a></li>
+                <li><a><i data-lucide="calendar" class="w-4 h-4 mr-1"></i> Appointment</a></li>
+            </ul>
+            <div class="flex items-center space-x-2 ml-4">
+                <a class="btn btn-ghost btn-sm text-sm"><i data-lucide="log-in" class="w-4 h-4 mr-1"></i> Login</a>
+                <a class="btn btn-ghost btn-sm text-sm hidden sm:block"><i data-lucide="lock" class="w-4 h-4 mr-1"></i> Forgot Password?</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="hero-background min-h-[400px] flex justify-center items-start pt-10 pb-20">
+        <div class="form-content w-full max-w-4xl p-4 sm:p-6 md:p-8">
+            
+            <div class="bg-primary text-white p-4 rounded-t-lg shadow-xl text-center">
+                <h2 class="text-2xl font-semibold">Doctor Appointment</h2>
+            </div>
+
+            <div class="card bg-white shadow-xl rounded-b-lg p-6 sm:p-8">
+                <div class="text-center mb-6">
+                    <p class="text-lg font-medium text-gray-700">
+                        Appointment Date : <span class="font-bold text-primary">October 22, 2025</span>
+                    </p>
+                    <p class="text-sm text-error mt-1">
+                        *** Advance Appointment booking is not available
+                    </p>
+                </div>
+
+                <form id="appointmentForm" class="space-y-6">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="form-control">
+                            <label class="label"><span class="label-text font-semibold">Choose Branch *</span></label>
+                            <select id="branch" class="select select-bordered w-full" required>
+                                <option disabled selected value="">Choose Branch</option>
+                                <option value="main">Branch 1</option>
+                                <option value="satellite">Branch 2</option>
+                                <option value="children">Branch 3</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-control">
+                            <label class="label"><span class="label-text font-semibold">Speciality *</span></label>
+                            <select id="speciality" class="select select-bordered w-full" required>
+                                <option disabled selected value="">Choose Specialist</option>
+                                <option value="cardio">Cardiology</option>
+                                <option value="ortho">Orthopedics</option>
+                                <option value="pedia">Pediatrics</option>
+                                <option value="derm">Dermatology</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label"><span class="label-text font-semibold">Doctor *</span></label>
+                        <select id="doctor" class="select select-bordered w-full" required>
+                            <option disabled selected value="">Choose a Doctor</option>
+                            <option value="dr_smith">Dr. SM Ferdous Ahmmed(Cardiology)</option>
+                            <option value="dr_jane">Dr. Kazi Mahfuza Hoque (Pediatrics)</option>
+                            <option value="dr_omar">Dr. Sadia Rahman (Orthopedics)</option>
+                            <option value="dr_omar">Dr. Bikash Ray (Orthopedics)</option>
+                            <option value="dr_omar">Dr. Redwan Arnob (Orthopedics)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-control">
+                        <label class="label"><span class="label-text font-semibold">Notes</span></label>
+                        <input id="notes" type="text" placeholder="Notes" class="input input-bordered w-full" />
+                    </div>
+
+                    <div class="flex justify-center items-center py-4 space-x-4">
+                        <button type="button" class="btn btn-sm btn-ghost btn-active text-primary" id="newPatientBtn">
+                            <i data-lucide="user-plus" class="w-4 h-4 mr-1"></i> New Patient
+                        </button>
+                        <span class="text-gray-400">|</span>
+                        <button type="button" class="btn btn-sm btn-ghost text-gray-500" id="registeredPatientBtn">
+                            <i data-lucide="user-check" class="w-4 h-4 mr-1"></i> Already Registered?
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="patientDetailsSection">
+                        <div class="form-control col-span-2 md:col-span-1">
+                            <label class="label"><span class="label-text font-semibold">Name *</span></label>
+                            <input id="name" type="text" placeholder="Full Name" class="input input-bordered" required />
+                        </div>
+                        
+                        <div class="form-control col-span-2 md:col-span-1">
+                            <label class="label"><span class="label-text font-semibold">Phone No. *</span></label>
+                            <input id="phone" type="tel" placeholder="01XXXXXXXXX" class="input input-bordered" required pattern="[0-9]{10,15}" title="Phone number must be 10-15 digits" />
+                        </div>
+                        
+                        <div class="form-control col-span-1 md:col-span-1">
+                            <label class="label"><span class="label-text font-semibold">Age *</span></label>
+                            <input id="age" type="number" placeholder="0" class="input input-bordered" min="1" max="120" required />
+                        </div>
+                        
+                        <div class="form-control col-span-1 md:col-span-1">
+                            <label class="label"><span class="label-text font-semibold">Gender *</span></label>
+                            <select id="gender" class="select select-bordered" required>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-control mt-6">
+                        <label class="label cursor-pointer justify-start space-x-2">
+                            <input id="terms" type="checkbox" class="checkbox checkbox-primary" required />
+                            <span class="label-text text-sm">I agree to the <a href="#" class="link link-primary">Terms and Conditions</a> *</span>
+                        </label>
+                    </div>
+
+                    <div class="form-control mt-10">
+                        <button type="submit" class="btn btn-primary btn-lg shadow-lg hover:shadow-xl transition duration-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 mr-2"></i> Confirm Appointment
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <div id="toastContainer" class="toast toast-end z-50"></div>
+
+
+
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+
+</body>
+</html>

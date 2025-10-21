@@ -1,0 +1,21 @@
+/* Custom styles for the overlay background effect */
+.hero-background {
+    background-image: url('https://images.ctfassets.net/hrltx12pl8hq/2RwJp3f9UiCnfWBEunwxOQ/f11257994853124d7b1a6a935e678c13/0_hero.webp?fit=fill&w=600&h=400');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.hero-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7); /* Light transparent overlay */
+    z-index: 1;
+}
+.form-content {
+    z-index: 10;
+    position: relative;
+}
